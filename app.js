@@ -22,8 +22,18 @@ admin.initializeApp({
 
 app.set('port', (process.env.PORT || 3001));
 
-app.get('*', (req, res) => {
-    res.send('Madden Companion Exporter');
+//app.get('*', (req, res) => {
+//    res.send('Madden Companion Exporter');
+//});
+
+app.get('/:username/:platform/:leagueId', (req, res) => {
+    let body = '';
+    req.on('data', chunk => {
+        body += chunk.toString();
+    });
+    req.on('end', () => {
+        res.send(JSON.parse(body));
+    });
 });
 
 app.post('/:username/:platform/:leagueId/leagueteams', (req, res) => {
