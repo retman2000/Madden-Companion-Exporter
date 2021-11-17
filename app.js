@@ -22,20 +22,8 @@ admin.initializeApp({
 
 app.set('port', (process.env.PORT || 3001));
 
-//app.get('*', (req, res) => {
-//    res.send('Madden Companion Exporter');
-//});
-
-app.post('/:username/:platform/:leagueId', (req, res) => {
-    let body = '';
-    req.on('data', chunk => {
-        body += chunk.toString();
-    });
-    req.on('end', () => {
-        body = JSON.parse(body);
-        console.log(body);
-        res.send(body);
-    });
+app.get('*', (req, res) => {
+    res.send('Madden Companion Exporter');
 });
 
 app.post('/:username/:platform/:leagueId/leagueteams', (req, res) => {
@@ -53,7 +41,8 @@ app.post('/:username/:platform/:leagueId/leagueteams', (req, res) => {
             const teamRef = ref.child(`data/${username}/${leagueId}/teams/${team.teamId}`);
             teamRef.set(team);
         });
-
+      
+        res.send(body);
         res.sendStatus(200);
     });
 });
@@ -76,6 +65,7 @@ app.post('/:username/:platform/:leagueId/standings', (req, res) => {
             teamRef.set(team);
         });
 
+        res.send(body);
         res.sendStatus(200);
     });
 });
@@ -144,6 +134,7 @@ app.post(
                 }
             }
 
+            res.send(body);
             res.sendStatus(200);
         });
     }
@@ -175,7 +166,8 @@ app.post('/:username/:platform/:leagueId/freeagents/roster', (req, res) => {
             } else {
                 console.log('Data saved successfully.');
             }
-        });
+        });        
+        res.send(body);
         res.sendStatus(200);
     });    
 });
@@ -206,6 +198,7 @@ app.post('/:username/:platform/:leagueId/team/:teamId/roster', (req, res) => {
                 console.log('Data saved successfully.');
             }
         });
+        res.send(body);
         res.sendStatus(200);
     });
 });
