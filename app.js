@@ -26,13 +26,15 @@ app.set('port', (process.env.PORT || 3001));
 //    res.send('Madden Companion Exporter');
 //});
 
-app.get('/:username/:platform/:leagueId', (req, res) => {
+app.post('/:username/:platform/:leagueId', (req, res) => {
     let body = '';
     req.on('data', chunk => {
         body += chunk.toString();
     });
     req.on('end', () => {
-        res.send(JSON.parse(body));
+        body = JSON.parse(body);
+        console.log(body);
+        res.send(body);
     });
 });
 
