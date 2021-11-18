@@ -26,6 +26,7 @@ app.get('*', (req, res) => {
     res.send('Madden Companion Exporter');
 });
 
+app.use(express.json());
 app.post('/:username/:platform/:leagueId/test', (req, res) => {
     let body = '';
     req.on('data', chunk => {
@@ -36,7 +37,7 @@ app.post('/:username/:platform/:leagueId/test', (req, res) => {
         //res.sendStatus(200);
     });
 
-    res.send(req.body);
+    res.json(req.body);
 });
 
 app.post('/:username/:platform/:leagueId/leagueteams', (req, res) => {
