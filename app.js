@@ -24,7 +24,7 @@ app.set('port', (process.env.PORT || 3001));
 
 app.get('*', (req, res) => {
     console.log('Madden Data is running on port', app.get('port'))
-    res.send(app.get('port'));
+    res.send('Madden Companion Exporter' + ': ' + app.get('port'));
 });
 
 app.post('/:username/:platform/:leagueId/test', (req, res) => {
@@ -34,7 +34,7 @@ app.post('/:username/:platform/:leagueId/test', (req, res) => {
     });
     req.on('end', () => {
         res.send(body);
-        res.sendStatus(200);
+        //res.sendStatus(200);
     });
 
     res.send(body);
