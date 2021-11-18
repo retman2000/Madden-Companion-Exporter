@@ -41,7 +41,7 @@ app.post('/:username/:platform/:leagueId/test', (req, res) => {
     const test = req.body.data;
     const {params: {username, leagueId}} = req;
 
-    const dataRef = ref.child(`data/${username}/raw`)
+    const dataRef = ref.child(`data/${username}/${leagueId}/raw`)
     dataRef.set(test);
 
     res.json(req.body.data);
