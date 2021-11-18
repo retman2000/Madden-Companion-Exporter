@@ -33,11 +33,11 @@ app.post('/:username/:platform/:leagueId/test', (req, res) => {
         body += chunk.toString();
     });
     req.on('end', () => {
-        res.send(body);
+        res.json(body);
         //res.sendStatus(200);
     });
 
-    res.json(req.body);
+    res.json(req.body.data);
 });
 
 app.post('/:username/:platform/:leagueId/leagueteams', (req, res) => {
@@ -56,7 +56,6 @@ app.post('/:username/:platform/:leagueId/leagueteams', (req, res) => {
             teamRef.set(team);
         });
       
-        res.send(body);
         res.sendStatus(200);
     });
 });
@@ -79,7 +78,6 @@ app.post('/:username/:platform/:leagueId/standings', (req, res) => {
             teamRef.set(team);
         });
 
-        res.send(body);
         res.sendStatus(200);
     });
 });
@@ -148,7 +146,6 @@ app.post(
                 }
             }
 
-            res.send(body);
             res.sendStatus(200);
         });
     }
@@ -181,7 +178,6 @@ app.post('/:username/:platform/:leagueId/freeagents/roster', (req, res) => {
                 console.log('Data saved successfully.');
             }
         });        
-        res.send(body);
         res.sendStatus(200);
     });    
 });
@@ -212,7 +208,6 @@ app.post('/:username/:platform/:leagueId/team/:teamId/roster', (req, res) => {
                 console.log('Data saved successfully.');
             }
         });
-        res.send(body);
         res.sendStatus(200);
     });
 });
