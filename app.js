@@ -28,6 +28,8 @@ app.get('*', (req, res) => {
 
 app.use(express.json());
 app.post('/:username/:platform/:leagueId/test', (req, res) => {
+    const db = admin.database();
+    const ref = db.ref();
     let body = '';
     req.on('data', chunk => {
         body += chunk.toString();
@@ -36,10 +38,13 @@ app.post('/:username/:platform/:leagueId/test', (req, res) => {
         res.json(body);
         //res.sendStatus(200);
     });
+    const test = req.body.data;
+    const {params: {username, leagueId}} = req;
 
-    //const user = req.params.username;
-    //const leagueId = req.params.leagueId;
-    res.json(req.body.data.username);
+    const dataRef = ref.child(`data/${username}/${leagueId}/raw`)
+    dataRef.set(test);
+
+    res.json(req.body.data);
 });
 
 app.post('/:username/:platform/:leagueId/leagueteams', (req, res) => {
