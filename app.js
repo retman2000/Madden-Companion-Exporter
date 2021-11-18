@@ -26,6 +26,19 @@ app.get('*', (req, res) => {
     res.send('Madden Companion Exporter');
 });
 
+app.post('/:username/:platform/:leagueId/test', (req, res) => {
+    const db = admin.database();
+    const ref = db.ref();
+    let body = '';
+    req.on('data', chunk => {
+        body += chunk.toString();
+    });
+    req.on('end', () => {
+        res.send(body);
+        res.sendStatus(200);
+    });
+});
+
 app.post('/:username/:platform/:leagueId/leagueteams', (req, res) => {
     const db = admin.database();
     const ref = db.ref();
