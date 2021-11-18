@@ -30,14 +30,6 @@ app.use(express.json());
 app.post('/:username/:platform/:leagueId/test', (req, res) => {
     const db = admin.database();
     const ref = db.ref();
-    let body = '';
-    req.on('data', chunk => {
-        body += chunk.toString();
-    });
-    req.on('end', () => {
-        res.json(body);
-        //res.sendStatus(200);
-    });
     const test = req.body.data;
     const {params: {username, leagueId}} = req;
 
@@ -58,6 +50,9 @@ app.post('/:username/:platform/:leagueId/leagueteams', (req, res) => {
         const { leagueTeamInfoList: teams } = JSON.parse(body);
         const {params: { username, leagueId }} = req;
 
+        const rawRef = ref.child(`data/${username}/${leagueId}/teams/leagueTeamInfoList`);
+        rawRef.set(teams);
+
         teams.forEach(team => {
             const teamRef = ref.child(`data/${username}/${leagueId}/teams/${team.teamId}`);
             teamRef.set(team);
@@ -77,6 +72,9 @@ app.post('/:username/:platform/:leagueId/standings', (req, res) => {
     req.on('end', () => {
         const { teamStandingInfoList: teams } = JSON.parse(body);
         const {params: { username, leagueId }} = req;
+
+        const rawRef = ref.child(`data/${username}/${leagueId}/teams/teamStandingInfoList`);
+        rawRef.set(teams);
 
         teams.forEach(team => {
             const teamRef = ref.child(
