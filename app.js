@@ -39,7 +39,7 @@ app.post('/:username/:platform/:leagueId/test', (req, res) => {
 
     //const user = req.params.username;
     //const leagueId = req.params.leagueId;
-    res.json(req.body.data.username.leagueId);
+    res.json(req.body.data.username);
 });
 
 app.post('/:username/:platform/:leagueId/leagueteams', (req, res) => {
