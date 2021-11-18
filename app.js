@@ -23,7 +23,8 @@ admin.initializeApp({
 app.set('port', (process.env.PORT || 3001));
 
 app.get('*', (req, res) => {
-    res.send('Madden Companion Exporter ',app.get('port'));
+    console.log('Madden Data is running on port', app.get('port'))
+    res.send('Madden Companion Exporter ');
 });
 
 app.post('/:username/:platform/:leagueId/test', (req, res) => {
