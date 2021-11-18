@@ -118,6 +118,10 @@ app.post(
                 }
                 case 'teamstats': {
                     const { teamStatInfoList: teamStats } = JSON.parse(body);
+
+                    const rawRef = ref.child(`${statsPath}/${weekType}/${weekNumber}/teamStatInfoList`);
+                    rawRef.set(teamStats);
+
                     teamStats.forEach(stat => {
                         const weekRef = ref.child(
                             `${statsPath}/${weekType}/${weekNumber}/${stat.teamId}/team-stats`
@@ -128,6 +132,10 @@ app.post(
                 }
                 case 'defense': {
                     const { playerDefensiveStatInfoList: defensiveStats } = JSON.parse(body);
+
+                    const rawRef = ref.child(`${statsPath}/${weekType}/${weekNumber}/playerDefensiveStatInfoList`);
+                    rawRef.set(defensiveStats);
+
                     defensiveStats.forEach(stat => {
                         const weekRef = ref.child(
                             `${statsPath}/${weekType}/${weekNumber}/${stat.teamId}/player-stats/${stat.rosterId}`
@@ -141,6 +149,10 @@ app.post(
                         dataType
                     )}StatInfoList`;
                     const stats = JSON.parse(body)[property];
+
+                    const rawRef = ref.child(`${statsPath}/${weekType}/${weekNumber}/${property}`);
+                    rawRef.set(stats);
+
                     stats.forEach(stat => {
                         const weekRef = ref.child(
                             `${statsPath}/${weekType}/${weekNumber}/${stat.teamId}/player-stats/${stat.rosterId}`
