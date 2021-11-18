@@ -37,7 +37,9 @@ app.post('/:username/:platform/:leagueId/test', (req, res) => {
         //res.sendStatus(200);
     });
 
-    res.json(req.body.data);
+    //const user = req.params.username;
+    //const leagueId = req.params.leagueId;
+    res.json(req.body.data.username.leagueId);
 });
 
 app.post('/:username/:platform/:leagueId/leagueteams', (req, res) => {
