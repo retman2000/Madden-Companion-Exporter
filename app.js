@@ -25,17 +25,17 @@ app.set('port', (process.env.PORT || 3001));
 app.get('*', (req, res) => {
     res.send('Madden Companion Exporter');
 });
-//app.use(express.json());
+app.use(express.json());
 app.post('/:username/:platform/:leagueId/test', (req, res) => {
     const db = admin.database();
     const ref = db.ref();
-    const test = JSON.parse(req.body);
+    const test = req.body.data;
     const {params: {username, leagueId}} = req;
 
     const dataRef = ref.child(`data/${username}/${leagueId}/raw`)
     dataRef.set(test);
 
-    res.send(req.body);
+    res.json(test);
 });
 
 app.post('/:username/:platform/:leagueId/leagueteams', (req, res) => {
