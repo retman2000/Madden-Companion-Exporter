@@ -25,7 +25,7 @@ app.set('port', (process.env.PORT || 3001));
 app.get('*', (req, res) => {
     res.send('Madden Companion Exporter');
 });
-
+/*
 app.use(express.json());
 app.post('/:username/:platform/:leagueId/test', (req, res) => {
     const db = admin.database();
@@ -38,7 +38,7 @@ app.post('/:username/:platform/:leagueId/test', (req, res) => {
 
     res.json(req.body.data);
 });
-
+*/
 app.post('/:username/:platform/:leagueId/leagueteams', (req, res) => {
     const db = admin.database();
     const ref = db.ref();
