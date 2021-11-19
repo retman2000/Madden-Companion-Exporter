@@ -29,7 +29,7 @@ app.get('*', (req, res) => {
 app.post('/:username/:platform/:leagueId/test', (req, res) => {
     const db = admin.database();
     const ref = db.ref();
-    const test = JSON.parse(req.body.data);
+    const test = JSON.parse(req.body);
     const {params: {username, leagueId}} = req;
 
     const dataRef = ref.child(`data/${username}/${leagueId}/raw`)
