@@ -35,7 +35,7 @@ app.post('/:username/:platform/:leagueId/test', (req, res) => {
     const dataRef = ref.child(`data/${username}/${leagueId}/raw`)
     dataRef.set(test);
 
-    res.send(test);
+    res.send(req.body);
 });
 
 app.post('/:username/:platform/:leagueId/leagueteams', (req, res) => {
